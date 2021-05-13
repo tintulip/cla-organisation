@@ -1,6 +1,6 @@
 # delegated-admin
 
-This directory manages the GuardDuty Organization Configuration and the AWS account that utilizes the resource must be assigned as a delegated Organization adminstator account. As the [root-delegation](./root-degation) assigns the delegated Organization Admin account as the `Audit Account`, this directory must be executed within the `audit account` profile. The delegated admin can then enable and manage GuardDuty for other AWS accounts within the Organization.
+This directory manages the GuardDuty Organization Configuration and the AWS account that utilizes the resource must be assigned as a delegated Organization adminstator account. As the [root-delegation](../root-degation) assigns the delegated Organization Admin account as the `Audit Account`, this directory must be executed within the `audit account` profile. The delegated admin can then enable and manage GuardDuty for other AWS accounts within the Organization.
 
 ## Inputs
 
