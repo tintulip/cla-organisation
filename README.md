@@ -25,6 +25,36 @@ It is recommended that the `audit account` becomes the GuardDuty delegated admin
 
 3. As S3 Logs are not currently automatically enabled with Terraform, a [further call to the AWS CLI](./delegated-admin#considerations) can be executed to ensure S3 protection.
 
-## Regions
+## Multiple Region Support
 
 By default, GuardDuty is only enabled for the region selected. In each directory, the `main.tf` file references the respective `guardduty` module multiple times for every region that needs to be enabled. The region aliases are placed in the `provider.tf` file.
+
+An example of `provider.tf` contents:
+```terraform
+provider "aws" {
+  alias  = "eu-west-2"
+  region = "eu-west-2"
+}
+
+provider "aws" {
+  alias  = "eu-west-1"
+  region = "eu-west-1"
+}
+```
+
+and the corresponding usage within `main.tf` with modules:
+```terraform
+module "eu-west-2" {
+  source           = "./path/to/module"
+  providers = {
+    aws = aws.eu-west-2
+  }
+}
+
+module "eu-west-1" {
+  source           = "./path/to/module"
+  providers = {
+    aws = aws.eu-west-1
+  }
+}
+```
