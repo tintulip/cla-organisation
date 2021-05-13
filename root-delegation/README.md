@@ -9,7 +9,7 @@ The only input required is the `admin_account_id` which typically is the `Audit 
 ## Usage
 
 ```bash
-AWS_PROFILE=<root admin account> terraform apply
+AWS_REGION=<anyregion> AWS_PROFILE=<root admin account> terraform apply
 ```
 
 ### Required Privileges
@@ -32,4 +32,12 @@ The following policy is required to enable GuardDuty delegated admin.
     ],
     "Resource": "*"
 }
+```
+
+## Security Testing
+
+```bash
+terraform validate
+tfsec .
+checkov -d .
 ```

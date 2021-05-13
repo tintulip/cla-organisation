@@ -6,7 +6,7 @@ This directory manages the GuardDuty Organization Configuration and the AWS acco
 
 Assuming that the steps within this repository are executed after setting up `AWS Control Tower`, there are two additional accounts that need to be added as members which are already part of the organization (`root` and `log archive`). Future accounts that are created will automatically have `AWS GuardDuty` enabled.
 
-Within [guard_duty.tf](./guard_duty.tf), there is a resource ([aws_guardduty_member](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_member)) which requires inputs to identify those accounts such as `aws_account_id` and `email`.
+Within [guard_duty.tf](./guardduty/guard_duty.tf), there is a resource ([aws_guardduty_member](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_member)) which requires inputs to identify those accounts such as `aws_account_id` and `email`.
 
 ## Considerations
 
@@ -15,11 +15,27 @@ Using the [guardduty_organization_configuration](https://registry.terraform.io/p
 ## Usage
 
 ```bash
-AWS_PROFILE=<audit admin account> terraform apply
+AWS_REGION=<anyregion> AWS_PROFILE=<audit admin account> terraform apply
+
+# For each region, enable S3 Logs
 
 # Get detector ID
-AWS_PROFILE=<audit admin account> aws guardduty list-detectors
+AWS_REGION=eu-west-2 AWS_PROFILE=<audit admin account> aws guardduty list-detectors
 
 # enable S3 Logs autoEnable
-AWS_PROFILE=<audit admin account> aws guardduty update-organization-configuration --detector-id <detecter-id> --auto-enable --data-sources S3Logs={AutoEnable=true}
+AWS_REGION=eu-west-2 AWS_PROFILE=<audit admin account> aws guardduty update-organization-configuration --detector-id <detecter-id> --auto-enable --data-sources S3Logs={AutoEnable=true}
+
+# Get detector ID
+AWS_REGION=eu-west-1 AWS_PROFILE=<audit admin account> aws guardduty list-detectors
+
+# enable S3 Logs autoEnable
+AWS_REGION=eu-west-1 AWS_PROFILE=<audit admin account> aws guardduty update-organization-configuration --detector-id <detecter-id> --auto-enable --data-sources S3Logs={AutoEnable=true}
+```
+
+## Security Testing
+
+```bash
+terraform validate
+tfsec .
+checkov -d .
 ```

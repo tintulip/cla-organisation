@@ -24,3 +24,7 @@ It is recommended that the `audit account` becomes the GuardDuty delegated admin
 2. Once the account is delegated as the GuardDuty administrator, it will have GuardDuty automatically enabled and is granted permission to enable and manage GuardDuty for all accounts in the organization. The [delegated-admin](./delegated-admin) directory will configure GuardDuty to ensure that all future accounts have GuardDuty automatically enabled as well as invite the remaining two accounts within the organization to enable GuardDuty.
 
 3. As S3 Logs are not currently automatically enabled with Terraform, a [further call to the AWS CLI](./delegated-admin#considerations) can be executed to ensure S3 protection.
+
+## Regions
+
+By default, GuardDuty is only enabled for the region selected. In each directory, the `main.tf` file references the respective `guardduty` module multiple times for every region that needs to be enabled. The region aliases are placed in the `provider.tf` file.
