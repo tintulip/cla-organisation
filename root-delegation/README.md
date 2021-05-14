@@ -9,7 +9,7 @@ The only input required is the `admin_account_id` which typically is the `Audit 
 ## Usage
 
 ```bash
-AWS_REGION=<anyregion> AWS_PROFILE=<root admin account> terraform apply
+AWS_REGION=global AWS_PROFILE=<root admin account> terraform apply
 ```
 
 ### Required Privileges

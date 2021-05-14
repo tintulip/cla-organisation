@@ -15,7 +15,7 @@ Using the [guardduty_organization_configuration](https://registry.terraform.io/p
 ## Usage
 
 ```bash
-AWS_REGION=<anyregion> AWS_PROFILE=<audit admin account> terraform apply
+AWS_REGION=global AWS_PROFILE=<audit admin account> terraform apply
 
 # For each region, enable S3 Logs
 
