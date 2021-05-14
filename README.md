@@ -1,4 +1,4 @@
-# enable-scps
+# service-control-policies
 
 Contains Service Control Policies (SCPs) which are used to define maximum available permissions for AWS accounts within an AWS Organization.
 
