@@ -32,6 +32,8 @@ AWS_REGION=eu-west-1 AWS_PROFILE=<audit admin account> aws guardduty list-detect
 AWS_REGION=eu-west-1 AWS_PROFILE=<audit admin account> aws guardduty update-organization-configuration --detector-id <detecter-id> --auto-enable --data-sources S3Logs={AutoEnable=true}
 ```
 
+*note:* May have to enable S3 logs for the root and log archive account as they would already be GuardDuty members.
+
 ## Security Testing
 
 ```bash
