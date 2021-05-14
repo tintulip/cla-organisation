@@ -1,8 +1,8 @@
 data "aws_iam_policy_document" "deny_services_for_child_root_accounts" {
   statement {
-    # All actions denied except those listed below
-    not_actions = [
-      "ec2:DescribeRegions"
+    sid = "DenyRootUser"
+    actions = [
+      "*"
     ]
     resources = [
       "*"
@@ -13,6 +13,15 @@ data "aws_iam_policy_document" "deny_services_for_child_root_accounts" {
       variable = "aws:PrincipalArn"
       values   = ["arn:aws:iam::*:root"]
     }
+  }
+  statement {
+    effect = "Deny"
+    actions = [
+      "organizations:LeaveOrganization"
+    ]
+    resources = [
+      "*"
+    ]
   }
 }
 
