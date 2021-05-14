@@ -12,6 +12,10 @@ Service Control Policies (SCPs) help to [manage permissions in an organization](
 
 This policy, found in [deny_child_root_accounts.tf](./deny_child_root_accounts.tf), prevents root users from being used in any account aside from the Control Management account.
 
+### Deny IAM users logging through the console
+
+This policy removes the ability for an IAM user to create a password and therefore be able to login through the IAM console. It can be found in [deny_console_logins.tf](./deny_console_logins.tf). Any situation which requires the use of logging in through the console can be done through logging in via SSO.
+
 ## Usage
 
 ```bash
