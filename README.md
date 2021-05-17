@@ -16,6 +16,10 @@ This policy, found in [deny_child_root_accounts.tf](./deny_child_root_accounts.t
 
 This policy removes the ability for an IAM user to create a password and therefore be able to login through the IAM console. It can be found in [deny_console_logins.tf](./deny_console_logins.tf). Any situation which requires the use of logging in through the console can be done through logging in via SSO. This is to prevent risks from weak passwords.
 
+### Disable all regions except London and Ireland
+
+This policy disables AWS regions we don't use so that we can't have bad things happening in regions where we might overlook. The regions added after 2019 are disabled by [default](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html). A further constraint has been added to prevent users from enabling these regions. It can be found in [deny_unused_regions.tf](./deny_unused_regions.tf). The template used to write this policy is available [here](https://controltower.aws-management.tools/security/restrict_regions/).
+
 ## Usage
 
 ```bash
