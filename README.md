@@ -20,6 +20,10 @@ This policy removes the ability for an IAM user to create a password and therefo
 
 This policy disables AWS regions we don't use so that we can't have bad things happening in regions where we might overlook. The regions added after 2019 are disabled by [default](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html). A further constraint has been added to prevent users from enabling these regions. It can be found in [deny_unused_regions.tf](./deny_unused_regions.tf). The template used to write this policy is available [here](https://controltower.aws-management.tools/security/restrict_regions/).
 
+### Availability trade-off
+
+Resilience from a regional failure is not prioritised over data location. The preferred data location is London then Ireland, therefore the CLA is restricted to these regions.
+
 ## Usage
 
 ```bash
