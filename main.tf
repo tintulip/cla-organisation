@@ -36,11 +36,13 @@ resource "aws_s3_bucket_policy" "app_logs" {
 data "aws_iam_policy_document" "cla_app_logs_role_policy" {
   statement {
     actions = [
-      "s3:ListBucket",
+      "s3:List*",
       "s3:GetBucketLocation",
       "s3:ReplicateObject",
       "s3:ReplicateDelete",
-      "s3:ReplicateTags"
+      "s3:ReplicateTags",
+      "s3:GetBucketVersioning",
+      "s3:PutBucketVersioning"
     ]
 
     principals {
