@@ -17,6 +17,25 @@ resource "aws_s3_bucket" "app_logs" {
     enabled = true
   }
 
+  lifecycle_rule {
+    id      = "log-archive"
+    enabled = true
+
+    tags = {
+      rule      = "log-archive"
+      autoclean = "true"
+    }
+
+    transition {
+      days          = 30
+      storage_class = "GLACIER"
+    }
+
+    expiration {
+      days = 90
+    }
+  }
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
