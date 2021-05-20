@@ -27,7 +27,9 @@ It is recommended that the `audit account` becomes the GuardDuty delegated admin
 
 ## Multiple Region Support
 
-By default, GuardDuty is only enabled for the region selected. In each directory, the `main.tf` file references the respective `guardduty` module multiple times for every region that needs to be enabled. The region aliases are placed in the `provider.tf` file.
+By default, GuardDuty is only enabled for the region selected. In this case, GuardDuty is manually enabled for all opted-in regions, Guard duty cannot be enabled for opted out regions. This had to be done manually in terraform as there is no [terraform](https://github.com/hashicorp/terraform/issues/24476) endpoint to make the code more dynamic.
+                                                               
+In each directory, the `main.tf` file references the respective `guardduty` module multiple times for every region that needs to be enabled. The region aliases are placed in the `provider.tf` file.
 
 An example of `provider.tf` contents:
 ```terraform
