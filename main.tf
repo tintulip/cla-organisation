@@ -70,7 +70,8 @@ data "aws_iam_policy_document" "cla_app_logs_role_policy" {
       "s3:ReplicateDelete",
       "s3:ReplicateTags",
       "s3:GetBucketVersioning",
-      "s3:PutBucketVersioning"
+      "s3:PutBucketVersioning",
+      "s3:ObjectOwnerOverrideToBucketOwner"
     ]
 
     principals {
