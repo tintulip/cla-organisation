@@ -42,6 +42,7 @@ data "aws_iam_policy_document" "deny_unused_regions" {
       "waf-regional:*",
       "waf:*",
       "wafv2:*",
+      "sns:ListTopics",
       "wellarchitected:*"
     ]
     resources = ["*"]
@@ -71,6 +72,7 @@ data "aws_iam_policy_document" "deny_unused_regions" {
     ]
     resources = ["*"]
   }
+
   statement {
     sid    = "DisableOptInRegions"
     effect = "Deny"
