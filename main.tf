@@ -1,3 +1,9 @@
+locals {
+  replication_role = "arn:aws:iam::073232250817:role/log-replication"
+  website_infra_role = "arn:aws:iam::073232250817:role/website-infra"
+}
+
+
 resource "aws_s3_bucket" "app_logs" {
   #tfsec:ignore:AWS002
   #checkov:skip=CKV_AWS_144:Not required to have cross region enabled
@@ -76,7 +82,7 @@ data "aws_iam_policy_document" "cla_app_logs_role_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::073232250817:role/log-replication"]
+      identifiers = [local.replication_role]
     }
 
     resources = ["${aws_s3_bucket.app_logs.arn}/*", aws_s3_bucket.app_logs.arn]
