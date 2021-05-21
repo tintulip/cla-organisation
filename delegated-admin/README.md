@@ -10,7 +10,7 @@ Within [guard_duty.tf](./guardduty/guard_duty.tf), there is a resource ([aws_gua
 
 ## Considerations
 
-Using the [guardduty_organization_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_organization_configuration) `auto_enable` argument does not automatically enable `S3 Protection` for all accounts. This is due to [the terraform code](https://github.com/hashicorp/terraform-provider-aws/blob/main/aws/resource_aws_guardduty_organization_configuration.go#L24) not passing the parameters required for `S3 protection` despite the [AWS API](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateOrganizationConfiguration.html#API_UpdateOrganizationConfiguration_RequestSyntax) supporting it. The only option is to manually enable through the AWS CLI.
+Using the [guardduty_organization_configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/guardduty_organization_configuration) `auto_enable` argument does not automatically enable `S3 Protection` for all accounts. This is due to [the terraform code](https://github.com/hashicorp/terraform-provider-aws/blob/main/aws/resource_aws_guardduty_organization_configuration.go#L24) not passing the parameters required for `S3 protection` despite the [AWS API](https://docs.aws.amazon.com/guardduty/latest/APIReference/API_UpdateOrganizationConfiguration.html#API_UpdateOrganizationConfiguration_RequestSyntax) supporting it. The only option is to manually enable through the AWS CLI. The following commands are not working for disabled regions (all bu eu-west-1 and eu-west-2), therefore registering the `production account` and enabling `S3 protection` needs to be done manually on the AWS console for all the regions.
 
 ## Usage
 
