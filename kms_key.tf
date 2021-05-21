@@ -57,7 +57,11 @@ data "aws_iam_policy_document" "kms" {
       identifiers = [local.replication_role]
     }
     actions = [
-      "kms:DescribeKey"
+      "kms:DescribeKey",
+      "kms:Decrypt",
+      "kms:GenerateDataKey*",
+      "kms:ReEncrypt*",
+      "kms:Encrypt"
     ]
     resources = ["*"]
   }
