@@ -1,5 +1,5 @@
 locals {
-  replication_role = "arn:aws:iam::073232250817:role/log-replication"
+  replication_role   = "arn:aws:iam::073232250817:role/log-replication"
   website_infra_role = "arn:aws:iam::073232250817:role/website-infra"
 }
 
