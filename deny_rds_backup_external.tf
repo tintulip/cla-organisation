@@ -8,16 +8,8 @@ data "aws_iam_policy_document" "deny_rds_backup_external" {
     effect = "Deny"
     actions = [
       "rds:CopyDBSnapshot",
-      "rds:CreateDBSnapshot",
-      "rds:DeleteDBSnapshot",
-      "rds:DescribeDBSnapshot",
-      "rds:DescribeEvents",
-      "rds:ModifyDBSnapshot",
       "rds:ModifyDBSnapshotAttribute",
       "rds:StartExportTask",
-      "rds:CancelExportTask",
-      "rds:DescribeExportTasks",
-      "rds:RestoreDBInstanceFromDBSnapshot",
       "rds:ShareDBSnapshot"
     ]
     resources = [
