@@ -44,7 +44,7 @@ data "aws_iam_policy_document" "kms" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = [local.website_infra_role]
+      identifiers = [local.website_infra_role, local.infra_deploy_role]
     }
     actions = [
       "kms:DescribeKey"
@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "kms" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = [local.replication_role]
+      identifiers = [local.replication_role, local.preprod_replication_role]
     }
     actions = [
       "kms:DescribeKey",
