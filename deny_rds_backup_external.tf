@@ -1,6 +1,8 @@
 locals {
-  workloads_id = element([for x in data.aws_organizations_organizational_units.ou.children : x.id if x.name == "Workloads_Prod"], 0)
+  workloads_id = [for x in data.aws_organizations_organizational_units.ou.children : x.id if x.name == "Workloads_Prod"]
 }
+
+
 
 data "aws_iam_policy_document" "deny_rds_backup_external" {
   statement {
@@ -28,6 +30,7 @@ resource "aws_organizations_policy" "deny_rds_backup_external" {
 }
 
 resource "aws_organizations_policy_attachment" "unit" {
+  for_each = toset(local.workloads_id)
   policy_id = aws_organizations_policy.deny_rds_backup_external.id
-  target_id = local.workloads_id
+  target_id = each.key
 }
