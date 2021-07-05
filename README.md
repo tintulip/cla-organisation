@@ -24,6 +24,10 @@ This policy disables AWS regions we don't use so that we can't have bad things h
 
 Resilience from a regional failure is not prioritised over data location. The preferred data location is London then Ireland, therefore the CLA is restricted to these regions. It is preferred to store personally identifiable information in London under GDPR legislation.
 
+### Deny RDS backup to go to external accounts.
+
+This policy prevents the database snapshots from being exported, modified or copied into external accounts. The policy can be found in [deny_rds_backup_external.tf](./deny_rds_backup_external.tf). The policy was created to prevent data exfiltration occuring via resource sharing, this occurs when the data inside the `rds` snapshots are shared with another account.   
+
 ## Usage
 
 ```bash
