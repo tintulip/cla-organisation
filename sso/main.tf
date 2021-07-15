@@ -113,6 +113,31 @@ resource "aws_ssoadmin_account_assignment" "delivery_teams_builder" {
   target_type = "AWS_ACCOUNT"
 }
 
+resource "aws_ssoadmin_permission_set" "devops_readonly" {
+  instance_arn = tolist(data.aws_ssoadmin_instances.control_tower.arns)[0]
+  name         = "DevOpsReadOnly"
+  description  = "For delivery teams to view the logs and metrics of services they develop and operate."
+}
+
+resource "aws_ssoadmin_managed_policy_attachment" "devops_readonly_policies" {
+  for_each           = toset(["arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess"])
+  instance_arn       = aws_ssoadmin_permission_set.devops_readonly.instance_arn
+  managed_policy_arn = each.key
+  permission_set_arn = aws_ssoadmin_permission_set.devops_readonly.arn
+}
+
+resource "aws_ssoadmin_account_assignment" "devops_readonly" {
+  for_each           = toset([local.accounts.preproduction, local.accounts.production, local.accounts.sandbox])
+  instance_arn       = aws_ssoadmin_permission_set.devops_readonly.instance_arn
+  permission_set_arn = aws_ssoadmin_permission_set.devops_readonly.arn
+
+  principal_id   = data.aws_identitystore_group.delivery_teams.group_id
+  principal_type = "GROUP"
+
+  target_id   = each.key
+  target_type = "AWS_ACCOUNT"
+}
+
 data "aws_identitystore_group" "governance" {
   identity_store_id = tolist(data.aws_ssoadmin_instances.control_tower.identity_store_ids)[0]
 
