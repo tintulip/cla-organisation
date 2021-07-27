@@ -30,7 +30,7 @@ resource "aws_organizations_policy" "deny_rds_backup_external" {
 }
 
 resource "aws_organizations_policy_attachment" "unit" {
-  for_each = toset(local.workloads_id)
+  for_each  = toset(local.workloads_id)
   policy_id = aws_organizations_policy.deny_rds_backup_external.id
   target_id = each.key
 }
